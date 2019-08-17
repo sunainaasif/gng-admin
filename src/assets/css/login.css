@@ -1,0 +1,26 @@
+.body {
+  /* background-color: rgb(8, 8, 51); */
+  background: rgb(5,13,65);
+background: radial-gradient(circle, rgba(5,13,65,0.9864320728291317) 0%, rgba(1,4,19,1) 100%);
+  color: white;
+  padding: 235px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  text-align: center;
+}
+@media all and (min-width: 480px) {
+.Login {
+  padding: 0 0;
+}
+.Login form {
+     margin: auto auto;
+      max-width: 320px;
+    }
+  }
+.email{
+  margin:0px 0px 20px 20px ;
+  font-weight:bold;
+}
+.pswd{
+  margin:40px 0px 20px 20px ;
+  font-weight:bold;
+}

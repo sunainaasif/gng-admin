@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React,{Component} from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // @material-ui/core components
@@ -31,9 +31,10 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
-
+import firebase from 'firebase'
 import avatar from "assets/img/faces/marc.jpg";
 
+import {  FormGroup, FormControl, FormLabel as FormLabel } from "react-bootstrap";
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -52,150 +53,134 @@ const styles = {
     textDecoration: "none"
   }
 };
+class UserProfile extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      product_name:"",
+      location:"",
+      imageurl:"",
+      barcode:0,
+      price:0,
+      availability:""
+    }
+  }
 
-function UserProfile(props) {
-  const { classes } = props;
+render() {
+  const { classes } = this.props;
+
+
   return (
     <div>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
-              <p className={classes.cardCategoryWhite}>Complete your profile</p>
+              <h4 className={classes.cardTitleWhite}>Product's Data</h4>
+              <p className={classes.cardCategoryWhite}>Add Data Here</p>
             </CardHeader>
             <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={5}>
-                  <CustomInput
-                    labelText="Company (disabled)"
-                    id="company-disabled"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      disabled: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Username"
-                    id="username"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Email address"
-                    id="email-address"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="First Name"
-                    id="first-name"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Last Name"
-                    id="last-name"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="City"
-                    id="city"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Country"
-                    id="country"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Postal Code"
-                    id="postal-code"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
-                  <CustomInput
-                    labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
-                    id="about-me"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      multiline: true,
-                      rows: 5
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
+          
+            <form 
+            //  this.state={productname:""}onSubmit={this.handleSubmit}
+            >
+              
+          <FormGroup controlId="email" bsSize="large">
+            <FormLabel className="email"> Prioduct - </FormLabel>
+              <FormControl
+              autoFocus
+              type="text"
+              onChange={(e)=>{this.setState({product_name:e.target.value})}}
+              
+              // onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <FormLabel className="pswd">Location - </FormLabel>
+              <FormControl
+              
+              // onChange={this.handleChange}
+              onChange={(e)=>{this.setState({location:e.target.value})}}
+              type="string"
+            />
+          </FormGroup>
+          <FormGroup controlId="email" bsSize="large">
+            <FormLabel className="email"> Img URL - </FormLabel>
+              <FormControl
+              autoFocus
+              type="string"
+              onChange={(e)=>{this.setState({imageurl:e.target.value})}}
+          
+
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <FormLabel className="pswd">Barcode - </FormLabel>
+              <FormControl
+              // value={this.state.password}
+              onChange={(e)=>{this.setState({barcode:e.target.value})}}
+           
+              // onChange={this.handleChange}
+              type="number"
+            />
+          </FormGroup>
+          <FormGroup controlId="email" bsSize="large">
+            <FormLabel className="email"> Price - - - </FormLabel>
+              <FormControl
+              autoFocus
+              type="number"
+              onChange={(e)=>{this.setState({price:e.target.value})}}
+         
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <FormLabel className="pswd">Available </FormLabel>
+              <FormControl
+              onChange={(e)=>{this.setState({availability:e.target.value})}}
+            
+              type="text"
+            />
+          </FormGroup>
+        </form>
+
+
             </CardBody>
             <CardFooter>
-              <Button color="primary">Update Profile</Button>
+              <Button color="primary" 
+              onClick={()=>{
+  const rootRef=firebase.database().ref().child('products');
+  const catRef=rootRef.child('category');
+  const apparelsRef=catRef.child('apparels');
+  const productref = apparelsRef.child(this.state.barcode.toString())
+  console.log(this.state)
+  productref.set({
+    product_name:this.state.product_name,
+    location:this.state.location.toString(),
+    barcode:Number(this.state.barcode),
+    imageurl:this.state.imageurl.toString(),
+    price:Number(this.state.price),
+    availability:this.state.availability.toString()
+
+
+
+  });
+  alert("Data saved in apparel.")
+              }}
+               >SAVE</Button>
             </CardFooter>
           </Card>
+
+
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-              <h4 className={classes.cardTitle}>Alec Thompson</h4>
-              <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                I love Rick Owens’ bed design but the back is...
-              </p>
-              <Button color="primary" round>
-                Follow
-              </Button>
-            </CardBody>
-          </Card>
-        </GridItem>
+        
       </GridContainer>
     </div>
   );
 }
 
+
+}
 UserProfile.propTypes = {
   classes: PropTypes.object
 };
-
 export default withStyles(styles)(UserProfile);

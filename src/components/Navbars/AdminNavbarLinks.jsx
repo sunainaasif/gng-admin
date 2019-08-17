@@ -68,7 +68,7 @@ class AdminNavbarLinks extends React.Component {
     const { openNotifcation, openProfile } = this.state;
     return (
       <div>
-        <div className={classes.searchWrapper}>
+        {/* <div className={classes.searchWrapper}>
           <CustomInput
             formControlProps={{
               className: classes.margin + " " + classes.search
@@ -176,8 +176,8 @@ class AdminNavbarLinks extends React.Component {
               </Grow>
             )}
           </Poppers>
-        </div>
-        <div className={classes.manager}>
+        </div> */}
+        {/* <div className={classes.manager}>
           <Button
             buttonRef={node => {
               this.anchorProfile = node;
@@ -243,7 +243,7 @@ class AdminNavbarLinks extends React.Component {
               </Grow>
             )}
           </Poppers>
-        </div>
+        </div> */}
       </div>
     );
   }

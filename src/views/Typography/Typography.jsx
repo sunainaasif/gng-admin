@@ -15,42 +15,27 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React,{Component} from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
+import InputLabel from "@material-ui/core/InputLabel";
 // core components
-import Quote from "components/Typography/Quote.jsx";
-import Muted from "components/Typography/Muted.jsx";
-import Primary from "components/Typography/Primary.jsx";
-import Info from "components/Typography/Info.jsx";
-import Success from "components/Typography/Success.jsx";
-import Warning from "components/Typography/Warning.jsx";
-import Danger from "components/Typography/Danger.jsx";
+import GridItem from "components/Grid/GridItem.jsx";
+import GridContainer from "components/Grid/GridContainer.jsx";
+import CustomInput from "components/CustomInput/CustomInput.jsx";
+import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
+import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import CardFooter from "components/Card/CardFooter.jsx";
+import firebase from 'firebase'
+import avatar from "assets/img/faces/marc.jpg";
 
-const style = {
-  typo: {
-    paddingLeft: "25%",
-    marginBottom: "40px",
-    position: "relative"
-  },
-  note: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    bottom: "10px",
-    color: "#c0c1c2",
-    display: "block",
-    fontWeight: "400",
-    fontSize: "13px",
-    lineHeight: "13px",
-    left: "0",
-    marginLeft: "20px",
-    position: "absolute",
-    width: "260px"
-  },
+import {  FormGroup, FormControl, FormLabel as FormLabel } from "react-bootstrap";
+const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
     margin: "0",
@@ -68,117 +53,145 @@ const style = {
     textDecoration: "none"
   }
 };
-function TypographyPage(props) {
-  const { classes } = props;
+class UserProfile extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      product_name:"",
+      location:"",
+      imageurl:"",
+      barcode:0,
+      price:0,
+      availability:""
+    }
+  }
+
+render() {
+  const { classes } = this.props;
+
+
   return (
-    <Card>
-      <CardHeader color="primary">
-        <h4 className={classes.cardTitleWhite}>Material Dashboard Heading</h4>
-        <p className={classes.cardCategoryWhite}>
-          Created using Roboto Font Family
-        </p>
-      </CardHeader>
-      <CardBody>
-        <div className={classes.typo}>
-          <div className={classes.note}>Header 1</div>
-          <h1>The Life of Material Dashboard</h1>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Header 2</div>
-          <h2>The Life of Material Dashboard</h2>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Header 3</div>
-          <h3>The Life of Material Dashboard</h3>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Header 4</div>
-          <h4>The Life of Material Dashboard</h4>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Header 5</div>
-          <h5>The Life of Material Dashboard</h5>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Header 6</div>
-          <h6>The Life of Material Dashboard</h6>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Paragraph</div>
-          <p>
-            I will be the leader of a company that ends up being worth billions
-            of dollars, because I got the answers. I understand culture. I am
-            the nucleus. I think that’s a responsibility that I have, to push
-            possibilities, to show people, this is the level that things could
-            be at.
-          </p>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Quote</div>
-          <Quote
-            text="I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at."
-            author=" Kanye West, Musician"
-          />
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Muted Text</div>
-          <Muted>
-            I will be the leader of a company that ends up being worth billions
-            of dollars, because I got the answers...
-          </Muted>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Primary Text</div>
-          <Primary>
-            I will be the leader of a company that ends up being worth billions
-            of dollars, because I got the answers...
-          </Primary>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Info Text</div>
-          <Info>
-            I will be the leader of a company that ends up being worth billions
-            of dollars, because I got the answers...
-          </Info>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Success Text</div>
-          <Success>
-            I will be the leader of a company that ends up being worth billions
-            of dollars, because I got the answers...
-          </Success>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Warning Text</div>
-          <Warning>
-            I will be the leader of a company that ends up being worth billions
-            of dollars, because I got the answers...
-          </Warning>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Danger Text</div>
-          <Danger>
-            I will be the leader of a company that ends up being worth billions
-            of dollars, because I got the answers...
-          </Danger>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Small Tag</div>
-          <h2>
-            Header with small subtitle
-            <br />
-            <small>
-              Use {'"'}Small{'"'} tag for the headers
-            </small>
-          </h2>
-        </div>
-      </CardBody>
-    </Card>
+    <div>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Product's Data</h4>
+              <p className={classes.cardCategoryWhite}>Add Data Here</p>
+            </CardHeader>
+            <CardBody>
+          
+            <form 
+            //  this.state={productname:""}onSubmit={this.handleSubmit}
+            >
+              
+          <FormGroup controlId="email" bsSize="large">
+            <FormLabel className="email"> Prioduct - </FormLabel>
+              <FormControl
+              autoFocus
+              type="text"
+              onChange={(e)=>{this.setState({product_name:e.target.value})}}
+              
+              // onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <FormLabel className="pswd">Location - </FormLabel>
+              <FormControl
+              
+              // onChange={this.handleChange}
+              onChange={(e)=>{this.setState({location:e.target.value})}}
+              type="string"
+            />
+          </FormGroup>
+          <FormGroup controlId="email" bsSize="large">
+            <FormLabel className="email"> Img URL - </FormLabel>
+              <FormControl
+              autoFocus
+              type="string"
+              onChange={(e)=>{this.setState({imageurl:e.target.value})}}
+          
+
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <FormLabel className="pswd">Barcode - </FormLabel>
+              <FormControl
+              // value={this.state.password}
+              onChange={(e)=>{this.setState({barcode:e.target.value})}}
+           
+              // onChange={this.handleChange}
+              type="number"
+            />
+          </FormGroup>
+          <FormGroup controlId="email" bsSize="large">
+            <FormLabel className="email"> Price - - - </FormLabel>
+              <FormControl
+              autoFocus
+              type="number"
+              onChange={(e)=>{this.setState({price:e.target.value})}}
+         
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <FormLabel className="pswd">Available </FormLabel>
+              <FormControl
+              onChange={(e)=>{this.setState({availability:e.target.value})}}
+            
+              type="text"
+            />
+          </FormGroup>
+        </form>
+
+
+            </CardBody>
+            <CardFooter>
+              <Button color="primary" 
+              onClick={()=>{
+  const rootRef=firebase.database().ref().child('products');
+  const catRef=rootRef.child('category');
+  const back_to_schoolRef=catRef.child('back_to_school');
+  const productref = back_to_schoolRef.child(this.state.barcode.toString())
+  console.log(this.state)
+  productref.set({
+    product_name:this.state.product_name,
+    location:this.state.location.toString(),
+    barcode:Number(this.state.barcode),
+    imageurl:this.state.imageurl.toString(),
+    price:Number(this.state.price),
+    availability:this.state.availability.toString()
+
+
+
+  });
+  alert("Data saved in apparel.")
+              }}
+               >SAVE</Button>
+            </CardFooter>
+          </Card>
+
+
+        </GridItem>
+        
+      </GridContainer>
+    </div>
   );
 }
 
-TypographyPage.propTypes = {
+
+}
+UserProfile.propTypes = {
   classes: PropTypes.object
 };
+export default withStyles(styles)(UserProfile);
 
-export default withStyles(style)(TypographyPage);
+
+
+
+
+
+
+
+
+
+

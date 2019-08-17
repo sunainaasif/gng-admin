@@ -15,98 +15,175 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker
-} from "react-google-maps";
+import React,{Component} from "react";
+// nodejs library to set properties for components
+import PropTypes from "prop-types";
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+import InputLabel from "@material-ui/core/InputLabel";
+// core components
+import GridItem from "components/Grid/GridItem.jsx";
+import GridContainer from "components/Grid/GridContainer.jsx";
+import CustomInput from "components/CustomInput/CustomInput.jsx";
+import Button from "components/CustomButtons/Button.jsx";
+import Card from "components/Card/Card.jsx";
+import CardHeader from "components/Card/CardHeader.jsx";
+import CardAvatar from "components/Card/CardAvatar.jsx";
+import CardBody from "components/Card/CardBody.jsx";
+import CardFooter from "components/Card/CardFooter.jsx";
+import firebase from 'firebase'
+import avatar from "assets/img/faces/marc.jpg";
 
-const CustomSkinMap = withScriptjs(
-  withGoogleMap(() => (
-    <GoogleMap
-      defaultZoom={13}
-      defaultCenter={{ lat: 40.748817, lng: -73.985428 }}
-      defaultOptions={{
-        scrollwheel: false,
-        zoomControl: true,
-        styles: [
-          {
-            featureType: "water",
-            stylers: [
-              { saturation: 43 },
-              { lightness: -11 },
-              { hue: "#0088ff" }
-            ]
-          },
-          {
-            featureType: "road",
-            elementType: "geometry.fill",
-            stylers: [
-              { hue: "#ff0000" },
-              { saturation: -100 },
-              { lightness: 99 }
-            ]
-          },
-          {
-            featureType: "road",
-            elementType: "geometry.stroke",
-            stylers: [{ color: "#808080" }, { lightness: 54 }]
-          },
-          {
-            featureType: "landscape.man_made",
-            elementType: "geometry.fill",
-            stylers: [{ color: "#ece2d9" }]
-          },
-          {
-            featureType: "poi.park",
-            elementType: "geometry.fill",
-            stylers: [{ color: "#ccdca1" }]
-          },
-          {
-            featureType: "road",
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#767676" }]
-          },
-          {
-            featureType: "road",
-            elementType: "labels.text.stroke",
-            stylers: [{ color: "#ffffff" }]
-          },
-          { featureType: "poi", stylers: [{ visibility: "off" }] },
-          {
-            featureType: "landscape.natural",
-            elementType: "geometry.fill",
-            stylers: [{ visibility: "on" }, { color: "#b8cb93" }]
-          },
-          { featureType: "poi.park", stylers: [{ visibility: "on" }] },
-          {
-            featureType: "poi.sports_complex",
-            stylers: [{ visibility: "on" }]
-          },
-          { featureType: "poi.medical", stylers: [{ visibility: "on" }] },
-          {
-            featureType: "poi.business",
-            stylers: [{ visibility: "simplified" }]
-          }
-        ]
-      }}
-    >
-      <Marker position={{ lat: 40.748817, lng: -73.985428 }} />
-    </GoogleMap>
-  ))
-);
+import {  FormGroup, FormControl, FormLabel as FormLabel } from "react-bootstrap";
+const styles = {
+  cardCategoryWhite: {
+    color: "rgba(255,255,255,.62)",
+    margin: "0",
+    fontSize: "14px",
+    marginTop: "0",
+    marginBottom: "0"
+  },
+  cardTitleWhite: {
+    color: "#FFFFFF",
+    marginTop: "0px",
+    minHeight: "auto",
+    fontWeight: "300",
+    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+    marginBottom: "3px",
+    textDecoration: "none"
+  }
+};
+class UserProfile extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      product_name:"",
+      location:"",
+      imageurl:"",
+      barcode:0,
+      price:0,
+      availability:""
+    }
+  }
 
-function Maps() {
+render() {
+  const { classes } = this.props;
+
+
   return (
-    <CustomSkinMap
-      googleMapURL="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"
-      loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `100vh` }} />}
-      mapElement={<div style={{ height: `100%` }} />}
-    />
+    <div>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Product's Data</h4>
+              <p className={classes.cardCategoryWhite}>Add Data Here</p>
+            </CardHeader>
+            <CardBody>
+          
+            <form 
+            //  this.state={productname:""}onSubmit={this.handleSubmit}
+            >
+              
+          <FormGroup controlId="email" bsSize="large">
+            <FormLabel className="email"> Prioduct - </FormLabel>
+              <FormControl
+              autoFocus
+              type="text"
+              onChange={(e)=>{this.setState({product_name:e.target.value})}}
+              
+              // onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <FormLabel className="pswd">Location - </FormLabel>
+              <FormControl
+              
+              // onChange={this.handleChange}
+              onChange={(e)=>{this.setState({location:e.target.value})}}
+              type="string"
+            />
+          </FormGroup>
+          <FormGroup controlId="email" bsSize="large">
+            <FormLabel className="email"> Img URL - </FormLabel>
+              <FormControl
+              autoFocus
+              type="string"
+              onChange={(e)=>{this.setState({imageurl:e.target.value})}}
+          
+
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <FormLabel className="pswd">Barcode - </FormLabel>
+              <FormControl
+              // value={this.state.password}
+              onChange={(e)=>{this.setState({barcode:e.target.value})}}
+           
+              // onChange={this.handleChange}
+              type="number"
+            />
+          </FormGroup>
+          <FormGroup controlId="email" bsSize="large">
+            <FormLabel className="email"> Price - - - </FormLabel>
+              <FormControl
+              autoFocus
+              type="number"
+              onChange={(e)=>{this.setState({price:e.target.value})}}
+         
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <FormLabel className="pswd">Available </FormLabel>
+              <FormControl
+              onChange={(e)=>{this.setState({availability:e.target.value})}}
+            
+              type="text"
+            />
+          </FormGroup>
+        </form>
+
+
+            </CardBody>
+            <CardFooter>
+              <Button color="primary" 
+              onClick={()=>{
+  const rootRef=firebase.database().ref().child('products');
+  const catRef=rootRef.child('category');
+  const food_groceryRef=catRef.child('food_grocery');
+  const productref = food_groceryRef.child(this.state.barcode.toString())
+  console.log(this.state)
+  productref.set({
+    product_name:this.state.product_name,
+    location:this.state.location.toString(),
+    barcode:Number(this.state.barcode),
+    imageurl:this.state.imageurl.toString(),
+    price:Number(this.state.price),
+    availability:this.state.availability.toString()
+
+
+
+  });
+  alert("Data saved in apparel.")
+              }}
+               >SAVE</Button>
+            </CardFooter>
+          </Card>
+
+
+        </GridItem>
+        
+      </GridContainer>
+    </div>
   );
 }
 
-export default Maps;
+
+}
+UserProfile.propTypes = {
+  classes: PropTypes.object
+};
+export default withStyles(styles)(UserProfile);
+
+
+

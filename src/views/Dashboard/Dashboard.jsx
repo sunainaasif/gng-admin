@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react plugin for creating charts
@@ -47,7 +47,9 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
-
+// firebase
+import firebase from 'firebase';
+import credentials from '../../assets/firebase/auth'
 import { bugs, website, server } from "variables/general.jsx";
 
 import {
@@ -55,10 +57,17 @@ import {
   emailsSubscriptionChart,
   completedTasksChart
 } from "variables/charts.jsx";
-
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
+import React from 'react';
 
 class Dashboard extends React.Component {
+
+  constructor(props){
+    super(props);
+    if(!firebase.apps.length){
+      firebase.initializeApp(credentials);
+    }
+  }
   state = {
     value: 0
   };

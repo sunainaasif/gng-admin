@@ -1,0 +1,28 @@
+.body{
+    background: rgb(5,13,65);
+    background: radial-gradient(circle, rgba(5,13,65,0.9864320728291317) 0%, rgba(1,4,19,1) 100%);
+    color: white;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    text-align: center;
+}
+
+@media all and (min-width: 480px) {
+    .Signup {
+      padding: 10px 0px;
+    }
+  
+    .Signup form {
+      margin: 0 auto;
+      max-width: 200px;
+    }
+  }
+  
+  .Signup form span.help-block {
+    font-size: 14px;
+    padding-bottom: 10px;
+    color: #999;
+  }
+  .headings{
+      text-align: center;
+  }
+  

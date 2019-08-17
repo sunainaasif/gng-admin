@@ -55,61 +55,61 @@ const dashboardRoutes = [
   },
   {
     path: "/typography",
-    name: "Information",
+    name: "Add School Products",
     rtlName: "طباعة",
-    icon: LibraryBooks,
+    icon: BubbleChart,
     component: Typography,
     layout: "/admin"
   },
   {
     path: "/notifications",
-    name: "Notifications",
+    name: "Add Health & Beauty",
     rtlName: "إخطارات",
-    icon: Notifications,
+    icon: BubbleChart,
     component: NotificationsPage,
     layout: "/admin"
   },
-  // {
-  //   path: "/user",
-  //   name: "User Profile",
-  //   rtlName: "ملف تعريفي للمستخدم",
-  //   icon: Person,
-  //   component: UserProfile,
-  //   layout: "/admin"
-  // },
-  // {
-  //   path: "/icons",
-  //   name: "Icons",
-  //   rtlName: "الرموز",
-  //   icon: BubbleChart,
-  //   component: Icons,
-  //   layout: "/admin"
-  // },
-  // {
-  //   path: "/maps",
-  //   name: "Maps",
-  //   rtlName: "خرائط",
-  //   icon: LocationOn,
-  //   component: Maps,
-  //   layout: "/admin"
-  // },
+  {
+    path: "/user",
+    name: "Add Apparels",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: BubbleChart,
+    component: UserProfile,
+    layout: "/admin"
+  },
+  {
+    path: "/icons",
+    name: "Add Pharmacy",
+    rtlName: "الرموز",
+    icon: BubbleChart,
+    component:Icons,
+    layout: "/admin"
+  },
+  {
+    path: "/maps",
+    name: "Add & Grocery",
+    rtlName: "خرائط",
+    icon: BubbleChart,
+    component: Maps,
+    layout: "/admin"
+  },
   
   // {
   //   path: "/rtl-page",
-  //   name: "RTL Support",
+  //   name: "Add Home Appliances",
   //   rtlName: "پشتیبانی از راست به چپ",
-  //   icon: Language,
+  //   icon: BubbleChart,
   //   component: RTLPage,
   //   layout: "/rtl"
   // },
-  // {
-  //   path: "/upgrade-to-pro",
-  //   name: "Upgrade To PRO",
-  //   rtlName: "التطور للاحترافية",
-  //   icon: Unarchive,
-  //   component: UpgradeToPro,
-  //   layout: "/admin"
-  // }
+  {
+    path: "/upgrade-to-pro",
+    name: "Add Home Appliances",
+    rtlName: "التطور للاحترافية",
+    icon: BubbleChart,
+    component: UpgradeToPro,
+    layout: "/admin"
+  }
 ];
 
 export default dashboardRoutes;

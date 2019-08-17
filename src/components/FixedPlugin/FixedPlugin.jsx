@@ -49,7 +49,7 @@ class FixedPlugin extends Component {
           "rtl-fixed-plugin": this.props.rtlActive
         })}
       >
-        <div id="fixedPluginClasses" className={this.props.fixedClasses}>
+        {/* <div id="fixedPluginClasses" className={this.props.fixedClasses}>
           <div onClick={this.handleClick}>
             <i className="fa fa-cog fa-2x" />
           </div>
@@ -198,7 +198,7 @@ class FixedPlugin extends Component {
             </li>
             <li className="adjustments-line" />
           </ul>
-        </div>
+        </div> */}
       </div>
     );
   }
